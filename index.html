@@ -1,12 +1,278 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fire Detection Analytics</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="auth.css">
 </head>
+
 <body>
+    <!-- Login Container -->
+    <div id="login-container" class="auth-container">
+        <div class="auth-left">
+            <div class="brand">
+                <h1>🔥 Fire Detection System</h1>
+                <p>Secure Access Portal</p>
+            </div>
+            <div class="features">
+                <div class="feature-item">
+                    <span class="feature-icon">🛡️</span>
+                    <div>
+                        <h3>Secure Access</h3>
+                        <p>Enterprise-grade security for fire department personnel</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">📊</span>
+                    <div>
+                        <h3>Real-Time Monitoring</h3>
+                        <p>24/7 fire detection and alert system</p>
+                    </div>
+                </div>
+                <div class="feature-item">
+                    <span class="feature-icon">🚨</span>
+                    <div>
+                        <h3>Instant Alerts</h3>
+                        <p>SMS and dashboard notifications</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="auth-right">
+            <!-- Login Form -->
+            <div id="login-form" class="auth-form active">
+                <div class="form-header">
+                    <h2>Welcome Back</h2>
+                    <p>Sign in to access your dashboard</p>
+                </div>
+
+                <form onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label for="login-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="login-email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                        <span class="error-message" id="login-email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="login-password"
+                                placeholder="Enter your password"
+                                required
+                            >
+                            <span class="toggle-password" onclick="togglePassword('login-password')">👁️</span>
+                        </div>
+                        <span class="error-message" id="login-password-error"></span>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" id="remember-me">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="forgot-password" onclick="showForgotPassword()">Forgot Password?</a>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Sign In</button>
+
+                    <div class="form-footer">
+                        <p>Don't have an account? <a href="#" onclick="showSignup()">Sign Up</a></p>
+                    </div>
+                </form>
+
+                <!-- Demo Credentials Info -->
+                <div class="demo-credentials">
+                    <p class="demo-title">Demo Credentials:</p>
+                    <p><strong>Email:</strong> admin@firedept.com</p>
+                    <p><strong>Password:</strong> FireDept@2024</p>
+                </div>
+            </div>
+
+            <!-- Signup Form -->
+            <div id="signup-form" class="auth-form">
+                <div class="form-header">
+                    <h2>Create Account</h2>
+                    <p>Register for fire department access</p>
+                </div>
+
+                <form onsubmit="handleSignup(event)">
+                    <div class="form-group">
+                        <label for="signup-name">Full Name</label>
+                        <input
+                            type="text"
+                            id="signup-name"
+                            placeholder="Enter your full name"
+                            required
+                            minlength="3"
+                        >
+                        <span class="error-message" id="signup-name-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="signup-email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                        <span class="error-message" id="signup-email-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-department">Department ID</label>
+                        <input
+                            type="text"
+                            id="signup-department"
+                            placeholder="Enter department ID (e.g., FD-2024-001)"
+                            required
+                            pattern="FD-[0-9]{4}-[0-9]{3}"
+                        >
+                        <span class="helper-text">Format: FD-YYYY-XXX</span>
+                        <span class="error-message" id="signup-department-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-phone">Phone Number</label>
+                        <input
+                            type="tel"
+                            id="signup-phone"
+                            placeholder="Enter 10-digit phone number"
+                            required
+                            pattern="[0-9]{10}"
+                        >
+                        <span class="helper-text">For SMS alert notifications</span>
+                        <span class="error-message" id="signup-phone-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-password">Password</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="signup-password"
+                                placeholder="Create a strong password"
+                                required
+                                oninput="validatePassword()"
+                            >
+                            <span class="toggle-password" onclick="togglePassword('signup-password')">👁️</span>
+                        </div>
+                        <div class="password-strength" id="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strength-fill"></div>
+                            </div>
+                            <span class="strength-text" id="strength-text">Password strength</span>
+                        </div>
+                        <span class="error-message" id="signup-password-error"></span>
+                    </div>
+
+                    <div class="password-requirements">
+                        <p class="requirements-title">Password must contain:</p>
+                        <ul>
+                            <li id="req-length">
+                                <span class="req-icon">○</span>
+                                At least 8 characters
+                            </li>
+                            <li id="req-uppercase">
+                                <span class="req-icon">○</span>
+                                One uppercase letter
+                            </li>
+                            <li id="req-lowercase">
+                                <span class="req-icon">○</span>
+                                One lowercase letter
+                            </li>
+                            <li id="req-number">
+                                <span class="req-icon">○</span>
+                                One number
+                            </li>
+                            <li id="req-special">
+                                <span class="req-icon">○</span>
+                                One special character (@$!%*?&#)
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="signup-confirm-password">Confirm Password</label>
+                        <div class="password-input">
+                            <input
+                                type="password"
+                                id="signup-confirm-password"
+                                placeholder="Re-enter your password"
+                                required
+                            >
+                            <span class="toggle-password" onclick="togglePassword('signup-confirm-password')">👁️</span>
+                        </div>
+                        <span class="error-message" id="signup-confirm-error"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" required>
+                            <span>I agree to the <a href="#" onclick="showTerms()">Terms of Service</a> and <a href="#" onclick="showPrivacy()">Privacy Policy</a></span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Create Account</button>
+
+                    <div class="form-footer">
+                        <p>Already have an account? <a href="#" onclick="showLogin()">Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div id="forgot-password-form" class="auth-form">
+                <div class="form-header">
+                    <h2>Reset Password</h2>
+                    <p>Enter your email to receive reset instructions</p>
+                </div>
+
+                <form onsubmit="handleForgotPassword(event)">
+                    <div class="form-group">
+                        <label for="forgot-email">Email Address</label>
+                        <input
+                            type="email"
+                            id="forgot-email"
+                            placeholder="Enter your registered email"
+                            required
+                        >
+                        <span class="error-message" id="forgot-email-error"></span>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Send Reset Link</button>
+
+                    <div class="form-footer">
+                        <p><a href="#" onclick="showLogin()">← Back to Sign In</a></p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content success">
+            <div class="modal-icon">✓</div>
+            <h2 id="success-title">Success!</h2>
+            <p id="success-message">Your account has been created successfully.</p>
+            <button onclick="closeSuccessModal()" class="modal-btn">Continue</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="main-content">
     <nav class="navbar">
         <div class="nav-content">
             <div class="logo">
@@ -14,10 +280,11 @@
             </div>
             <ul class="nav-links">
                 <li><button onclick="showPage('home')" id="nav-home" class="active">Home</button></li>
-                <li><button onclick="showPage('analytics')" id="nav-analytics">Analytics</button></li>
+                <li><button onclick="window.location.href='dashboard.html'" id="nav-analytics">Analytics</button></li>
                 <li><button onclick="showPage('features')" id="nav-features">Features</button></li>
                 <li><button onclick="showPage('demo')" id="nav-demo">Live Demo</button></li>
                 <li><button onclick="showPage('requirements')" id="nav-requirements">Requirements</button></li>
+                <li><button onclick="logout()">Logout</button></li>
             </ul>
         </div>
     </nav>
@@ -38,7 +305,8 @@
                 <div class="feature-card" onclick="showPage('analytics')">
                     <div class="feature-icon">📊</div>
                     <h3>Data Analysis</h3>
-                    <p>Advanced pattern recognition and predictive algorithms to detect fire risks before they escalate.</p>
+                    <p>Advanced pattern recognition and predictive algorithms to detect fire risks before they escalate.
+                    </p>
                 </div>
                 <div class="feature-card" onclick="showPage('features')">
                     <div class="feature-icon">🎯</div>
@@ -67,64 +335,6 @@
                 <p>Advanced algorithms for fire prediction and false alarm reduction</p>
             </div>
 
-            <div class="analysis-section">
-                <h2>🧠 Core Analytics Techniques</h2>
-                <div class="analysis-grid">
-                    <div class="analysis-card">
-                        <h3>Pattern Recognition with Time Mapping</h3>
-                        <p>Track the time when smoke or heat levels change sharply. Helps identify common risk hours (e.g., late night, during cooking hours).</p>
-                        <div class="why">
-                            <strong>Why it matters:</strong> Shows the system is smart enough to learn human behavior patterns and predict high-risk periods.
-                        </div>
-                    </div>
-
-                    <div class="analysis-card">
-                        <h3>Multi-Sensor Cross Verification</h3>
-                        <p>Use temperature, gas, and optical sensors together. Cross-check if all sensors show danger before triggering alarm.</p>
-                        <div class="why">
-                            <strong>Why it matters:</strong> Reduces false alerts significantly by requiring consensus across multiple data points.
-                        </div>
-                    </div>
-
-                    <div class="analysis-card">
-                        <h3>Confidence Score System</h3>
-                        <p>Calculate a "fire danger score" from 0 to 100 based on sensor input. More signals = higher score = more serious alert.</p>
-                        <div class="why">
-                            <strong>Why it matters:</strong> Adds logic and transparency to how the system thinks and makes decisions.
-                        </div>
-                    </div>
-
-                    <div class="analysis-card">
-                        <h3>Incident Outcome Analysis</h3>
-                        <p>Review past sensor data to understand conditions before, during, and after fire events. Track alert response times to identify delays or inefficiencies.</p>
-                        <div class="why">
-                            <strong>Why it matters:</strong> Helps improve emergency protocols and system design using real incident data.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="analysis-section">
-                <h2>📈 Predictive Capabilities</h2>
-                <div class="feature-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🕐</div>
-                        <h3>Temporal Analysis</h3>
-                        <p>Analyze historical data to identify time-based patterns in fire incidents and environmental conditions.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🎯</div>
-                        <h3>Risk Assessment</h3>
-                        <p>Continuously evaluate multiple parameters to calculate real-time risk scores and threat levels.</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">🔔</div>
-                        <h3>Early Warning System</h3>
-                        <p>Detect anomalies and gradual changes that precede fire events, enabling proactive response.</p>
-                    </div>
-                </div>
-            </div>
-
             <div class="pagination">
                 <button class="nav-button prev" onclick="showPage('home')">← Previous</button>
                 <button class="nav-button" onclick="showPage('features')">Next: Features →</button>
@@ -144,13 +354,15 @@
                 <div class="feature-card">
                     <div class="feature-icon">📡</div>
                     <h3>Multi-Sensor Integration</h3>
-                    <p>Combines MQ-2 gas sensor, flame sensor, and temperature sensor for comprehensive environmental monitoring.</p>
+                    <p>Combines MQ-2 gas sensor, flame sensor, and temperature sensor for comprehensive environmental
+                        monitoring.</p>
                 </div>
 
                 <div class="feature-card">
                     <div class="feature-icon">📱</div>
                     <h3>GSM Alert System</h3>
-                    <p>Instant SMS notifications via SIM800L module to registered mobile numbers when hazards are detected.</p>
+                    <p>Instant SMS notifications via SIM800L module to registered mobile numbers when hazards are
+                        detected.</p>
                 </div>
 
                 <div class="feature-card">
@@ -174,7 +386,8 @@
                 <div class="feature-card">
                     <div class="feature-icon">📊</div>
                     <h3>Data Visualization</h3>
-                    <p>Optional cloud-based dashboards to track environmental trends and emergency occurrences over time.</p>
+                    <p>Optional cloud-based dashboards to track environmental trends and emergency occurrences over
+                        time.</p>
                 </div>
             </div>
 
@@ -183,11 +396,13 @@
                 <div class="analysis-grid">
                     <div class="analysis-card">
                         <h3>Continuous Monitoring</h3>
-                        <p>24/7 surveillance of smoke levels, flame presence, and temperature variations without interruption.</p>
+                        <p>24/7 surveillance of smoke levels, flame presence, and temperature variations without
+                            interruption.</p>
                     </div>
                     <div class="analysis-card">
                         <h3>Automatic Alerts</h3>
-                        <p>No human intervention required - system automatically sends SMS alerts when thresholds are exceeded.</p>
+                        <p>No human intervention required - system automatically sends SMS alerts when thresholds are
+                            exceeded.</p>
                     </div>
                     <div class="analysis-card">
                         <h3>Local Alarm</h3>
@@ -216,7 +431,8 @@
             </div>
 
             <h2 style="text-align: center; margin: 2rem 0; color: var(--accent);">Real-Time Sensor Readings</h2>
-            <p style="text-align: center; color: #a0a0a0; margin-bottom: 2rem;">Click on any sensor card to cycle through different states</p>
+            <p style="text-align: center; color: #a0a0a0; margin-bottom: 2rem;">Click on any sensor card to cycle
+                through different states</p>
 
             <div class="sensor-demo">
                 <div class="sensor-card" onclick="updateSensor('smoke')">
@@ -250,7 +466,8 @@
 
             <div class="alert-demo">
                 <h3>Alert System Simulation</h3>
-                <p style="margin: 1rem 0; color: #a0a0a0;">Test different emergency scenarios and see how the system responds</p>
+                <p style="margin: 1rem 0; color: #a0a0a0;">Test different emergency scenarios and see how the system
+                    responds</p>
                 <button class="alert-button" onclick="simulateAlert('safe')">✓ Safe Conditions</button>
                 <button class="alert-button" onclick="simulateAlert('warning')">⚠ Warning Level</button>
                 <button class="alert-button" onclick="simulateAlert('danger')">🔥 FIRE DETECTED!</button>
@@ -379,6 +596,8 @@
         </div>
     </div>
 
+    <script src="auth.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>

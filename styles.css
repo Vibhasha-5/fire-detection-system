@@ -34,8 +34,14 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.logo {
+    position: absolute;
+    left: 0;
 }
 
 .logo {
@@ -370,6 +376,7 @@ body {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 10px;
     transition: all 0.3s;
+    min-height: 80px;
 }
 
 .req-item:hover {

@@ -142,7 +142,40 @@ function simulateAlert(level) {
     }
 }
 
-// Initialize page on load
+// Check login status on load
 document.addEventListener('DOMContentLoaded', function() {
-    showPage('home');
+    const currentUser = sessionStorage.getItem('currentUser');
+    const rememberedUser = localStorage.getItem('rememberedUser');
+
+    if (currentUser) {
+        // User is logged in, show main content
+        document.getElementById('login-container').style.display = 'none';
+        document.getElementById('main-content').style.display = 'block';
+        showPage('home');
+    } else {
+        // User not logged in, show login
+        document.getElementById('login-container').style.display = 'flex';
+        document.getElementById('main-content').style.display = 'none';
+
+        // If remembered user, pre-fill email
+        if (rememberedUser) {
+            document.getElementById('login-email').value = rememberedUser;
+            document.getElementById('remember-me').checked = true;
+        }
+    }
 });
+
+// Function to show main content after login
+function showMainContent() {
+    document.getElementById('login-container').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    showPage('home');
+}
+
+// Logout function
+function logout() {
+    sessionStorage.removeItem('currentUser');
+    localStorage.removeItem('rememberedUser');
+    document.getElementById('login-container').style.display = 'flex';
+    document.getElementById('main-content').style.display = 'none';
+}

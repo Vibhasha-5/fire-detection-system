@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fire Detection Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">
+                🔥 Fire Detection Analytics
+            </div>
+            <ul class="nav-links">
+                <li><button onclick="showPage('home')" id="nav-home" class="active">Home</button></li>
+                <li><button onclick="showPage('analytics')" id="nav-analytics">Analytics</button></li>
+                <li><button onclick="showPage('features')" id="nav-features">Features</button></li>
+                <li><button onclick="showPage('demo')" id="nav-demo">Live Demo</button></li>
+                <li><button onclick="showPage('requirements')" id="nav-requirements">Requirements</button></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <div class="container">
+            <div class="hero">
+                <h1>Fire & Smoke Detection System</h1>
+                <p>IoE-Enabled Smart Safety with Advanced Analytics</p>
+                <div class="cta-buttons">
+                    <button class="cta-button" onclick="showPage('analytics')">Explore Analytics →</button>
+                    <button class="cta-button secondary" onclick="showPage('demo')">View Live Demo</button>
+                </div>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card" onclick="showPage('analytics')">
+                    <div class="feature-icon">📊</div>
+                    <h3>Data Analysis</h3>
+                    <p>Advanced pattern recognition and predictive algorithms to detect fire risks before they escalate.</p>
+                </div>
+                <div class="feature-card" onclick="showPage('features')">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Smart Features</h3>
+                    <p>Multi-sensor verification, confidence scoring, and intelligent alert systems.</p>
+                </div>
+                <div class="feature-card" onclick="showPage('demo')">
+                    <div class="feature-icon">🚨</div>
+                    <h3>Real-Time Monitoring</h3>
+                    <p>Live sensor data visualization with instant SMS alerts via GSM module.</p>
+                </div>
+                <div class="feature-card" onclick="showPage('requirements')">
+                    <div class="feature-icon">🛠️</div>
+                    <h3>System Architecture</h3>
+                    <p>Arduino-based implementation with comprehensive hardware and software integration.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANALYTICS PAGE -->
+    <div id="analytics" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1>📊 Data Analysis & Intelligence</h1>
+                <p>Advanced algorithms for fire prediction and false alarm reduction</p>
+            </div>
+
+            <div class="analysis-section">
+                <h2>🧠 Core Analytics Techniques</h2>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>Pattern Recognition with Time Mapping</h3>
+                        <p>Track the time when smoke or heat levels change sharply. Helps identify common risk hours (e.g., late night, during cooking hours).</p>
+                        <div class="why">
+                            <strong>Why it matters:</strong> Shows the system is smart enough to learn human behavior patterns and predict high-risk periods.
+                        </div>
+                    </div>
+
+                    <div class="analysis-card">
+                        <h3>Multi-Sensor Cross Verification</h3>
+                        <p>Use temperature, gas, and optical sensors together. Cross-check if all sensors show danger before triggering alarm.</p>
+                        <div class="why">
+                            <strong>Why it matters:</strong> Reduces false alerts significantly by requiring consensus across multiple data points.
+                        </div>
+                    </div>
+
+                    <div class="analysis-card">
+                        <h3>Confidence Score System</h3>
+                        <p>Calculate a "fire danger score" from 0 to 100 based on sensor input. More signals = higher score = more serious alert.</p>
+                        <div class="why">
+                            <strong>Why it matters:</strong> Adds logic and transparency to how the system thinks and makes decisions.
+                        </div>
+                    </div>
+
+                    <div class="analysis-card">
+                        <h3>Incident Outcome Analysis</h3>
+                        <p>Review past sensor data to understand conditions before, during, and after fire events. Track alert response times to identify delays or inefficiencies.</p>
+                        <div class="why">
+                            <strong>Why it matters:</strong> Helps improve emergency protocols and system design using real incident data.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="analysis-section">
+                <h2>📈 Predictive Capabilities</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🕐</div>
+                        <h3>Temporal Analysis</h3>
+                        <p>Analyze historical data to identify time-based patterns in fire incidents and environmental conditions.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🎯</div>
+                        <h3>Risk Assessment</h3>
+                        <p>Continuously evaluate multiple parameters to calculate real-time risk scores and threat levels.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔔</div>
+                        <h3>Early Warning System</h3>
+                        <p>Detect anomalies and gradual changes that precede fire events, enabling proactive response.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="nav-button prev" onclick="showPage('home')">← Previous</button>
+                <button class="nav-button" onclick="showPage('features')">Next: Features →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURES PAGE -->
+    <div id="features" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1>🎯 System Features</h1>
+                <p>Intelligent fire detection with cutting-edge capabilities</p>
+            </div>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📡</div>
+                    <h3>Multi-Sensor Integration</h3>
+                    <p>Combines MQ-2 gas sensor, flame sensor, and temperature sensor for comprehensive environmental monitoring.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <h3>GSM Alert System</h3>
+                    <p>Instant SMS notifications via SIM800L module to registered mobile numbers when hazards are detected.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🌐</div>
+                    <h3>IoE Connectivity</h3>
+                    <p>Internet of Everything integration for remote monitoring and cloud-based data logging.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-Time Processing</h3>
+                    <p>Arduino-powered system processes sensor data instantly for immediate threat detection.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🔍</div>
+                    <h3>False Alarm Reduction</h3>
+                    <p>Advanced algorithms cross-verify multiple data sources before triggering alerts.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Data Visualization</h3>
+                    <p>Optional cloud-based dashboards to track environmental trends and emergency occurrences over time.</p>
+                </div>
+            </div>
+
+            <div class="analysis-section" style="margin-top: 3rem;">
+                <h2>🛡️ Safety Mechanisms</h2>
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <h3>Continuous Monitoring</h3>
+                        <p>24/7 surveillance of smoke levels, flame presence, and temperature variations without interruption.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>Automatic Alerts</h3>
+                        <p>No human intervention required - system automatically sends SMS alerts when thresholds are exceeded.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>Local Alarm</h3>
+                        <p>Immediate buzzer activation provides on-site warning for building occupants.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <h3>Data Logging</h3>
+                        <p>Records all sensor readings and incidents for post-event analysis and system improvement.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="nav-button prev" onclick="showPage('analytics')">← Previous</button>
+                <button class="nav-button" onclick="showPage('demo')">Next: Live Demo →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- DEMO PAGE -->
+    <div id="demo" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1>🚨 Live System Demo</h1>
+                <p>Interactive sensor monitoring and alert simulation</p>
+            </div>
+
+            <h2 style="text-align: center; margin: 2rem 0; color: var(--accent);">Real-Time Sensor Readings</h2>
+            <p style="text-align: center; color: #a0a0a0; margin-bottom: 2rem;">Click on any sensor card to cycle through different states</p>
+
+            <div class="sensor-demo">
+                <div class="sensor-card" onclick="updateSensor('smoke')">
+                    <div class="sensor-icon">💨</div>
+                    <h3>Smoke Level</h3>
+                    <div class="sensor-value" id="smoke-value">45 PPM</div>
+                    <span class="status-badge status-safe" id="smoke-status">SAFE</span>
+                </div>
+
+                <div class="sensor-card" onclick="updateSensor('flame')">
+                    <div class="sensor-icon">🔥</div>
+                    <h3>Flame Detected</h3>
+                    <div class="sensor-value" id="flame-value">NO</div>
+                    <span class="status-badge status-safe" id="flame-status">SAFE</span>
+                </div>
+
+                <div class="sensor-card" onclick="updateSensor('temp')">
+                    <div class="sensor-icon">🌡️</div>
+                    <h3>Temperature</h3>
+                    <div class="sensor-value" id="temp-value">28°C</div>
+                    <span class="status-badge status-safe" id="temp-status">NORMAL</span>
+                </div>
+
+                <div class="sensor-card" onclick="updateSensor('danger')">
+                    <div class="sensor-icon">⚡</div>
+                    <h3>Danger Score</h3>
+                    <div class="sensor-value" id="danger-value">15/100</div>
+                    <span class="status-badge status-safe" id="danger-status">LOW RISK</span>
+                </div>
+            </div>
+
+            <div class="alert-demo">
+                <h3>Alert System Simulation</h3>
+                <p style="margin: 1rem 0; color: #a0a0a0;">Test different emergency scenarios and see how the system responds</p>
+                <button class="alert-button" onclick="simulateAlert('safe')">✓ Safe Conditions</button>
+                <button class="alert-button" onclick="simulateAlert('warning')">⚠ Warning Level</button>
+                <button class="alert-button" onclick="simulateAlert('danger')">🔥 FIRE DETECTED!</button>
+            </div>
+
+            <div class="pagination">
+                <button class="nav-button prev" onclick="showPage('features')">← Previous</button>
+                <button class="nav-button" onclick="showPage('requirements')">Next: Requirements →</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- REQUIREMENTS PAGE -->
+    <div id="requirements" class="page">
+        <div class="container">
+            <div class="page-header">
+                <h1>🛠️ System Requirements</h1>
+                <p>Complete hardware and software specifications</p>
+            </div>
+
+            <div class="requirements-grid">
+                <div class="req-section">
+                    <h3>Hardware Components</h3>
+                    <div class="req-item">
+                        <span class="req-icon">🔌</span>
+                        <div>
+                            <strong>Arduino Uno / ESP8266</strong>
+                            <p>Main controller to collect sensor data and send it to the cloud</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">💨</span>
+                        <div>
+                            <strong>MQ-2 Gas Sensor</strong>
+                            <p>Detects smoke and combustible gases (LPG, propane, methane)</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🔥</span>
+                        <div>
+                            <strong>Flame Sensor</strong>
+                            <p>IR-based sensor to detect fire and flame presence</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🌡️</span>
+                        <div>
+                            <strong>Temperature Sensor</strong>
+                            <p>DHT11/DHT22 for temperature and humidity monitoring</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">📱</span>
+                        <div>
+                            <strong>SIM800L GSM Module</strong>
+                            <p>Enables SMS alerts to registered mobile numbers</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🔔</span>
+                        <div>
+                            <strong>Buzzer</strong>
+                            <p>Local alert indication for immediate awareness</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">⚡</span>
+                        <div>
+                            <strong>Power Supply</strong>
+                            <p>5V/12V adapter to power the entire circuit</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🔗</span>
+                        <div>
+                            <strong>Breadboard & Jumper Wires</strong>
+                            <p>For prototyping and sensor connections</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="req-section">
+                    <h3>Software Components</h3>
+                    <div class="req-item">
+                        <span class="req-icon">💻</span>
+                        <div>
+                            <strong>Arduino IDE</strong>
+                            <p>Programming and uploading code to microcontroller</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🐍</span>
+                        <div>
+                            <strong>Python</strong>
+                            <p>Data analysis, visualization, and machine learning implementation</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">📝</span>
+                        <div>
+                            <strong>VS Code</strong>
+                            <p>Python coding and data exploration environment</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">📊</span>
+                        <div>
+                            <strong>Data Analysis Libraries</strong>
+                            <p>Pandas, NumPy, Matplotlib for data processing and visualization</p>
+                        </div>
+                    </div>
+                    <div class="req-item">
+                        <span class="req-icon">🌐</span>
+                        <div>
+                            <strong>IoT Platform (Optional)</strong>
+                            <p>ThingSpeak, Firebase, or AWS IoT for cloud data logging</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pagination">
+                <button class="nav-button prev" onclick="showPage('demo')">← Previous</button>
+                <button class="nav-button" onclick="showPage('home')">Back to Home →</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
